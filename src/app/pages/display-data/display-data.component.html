@@ -1,0 +1,20 @@
+<h2 class="content-block">Software Projects</h2>
+
+<dx-data-grid id="gridContainer" [dataSource]="dataSource" keyExpr="ID" [allowColumnReordering]="true"
+    [showBorders]="true" (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')"
+    (onRowInserting)="logEvent('RowInserting')" (onRowInserted)="logEvent('RowInserted');addRow($event.data)"
+    (onRowUpdating)="logEvent('RowUpdating')" (onRowUpdated)="logEvent('RowUpdated'); updateRow($event.data)"
+    (onRowRemoving)="logEvent('RowRemoving')" (onRowRemoved)="logEvent('RowRemoved');deleteRow($event.data.ID)">
+    <dxo-paging [enabled]="true"></dxo-paging>
+    <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true">
+    </dxo-editing>
+    <dxi-column dataField="ID" caption="Project ID">
+    </dxi-column>
+    <dxi-column dataField="projectName" caption="Project Name"></dxi-column>
+    <dxi-column dataField="startDate" [width]="125" dataType="date" caption="Start Date">
+    </dxi-column>
+    <dxi-column dataField="endDate" [width]="125" dataType="date" caption="End Date">
+    </dxi-column>
+    <dxi-column dataField="priority" caption="Priority"></dxi-column>
+    <dxi-column dataField="status" caption="Status"></dxi-column>
+</dx-data-grid>
