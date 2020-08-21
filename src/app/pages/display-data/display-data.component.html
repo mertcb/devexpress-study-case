@@ -4,17 +4,30 @@
     [showBorders]="true" (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')"
     (onRowInserting)="logEvent('RowInserting')" (onRowInserted)="logEvent('RowInserted');addRow($event.data)"
     (onRowUpdating)="logEvent('RowUpdating')" (onRowUpdated)="logEvent('RowUpdated'); updateRow($event.data)"
-    (onRowRemoving)="logEvent('RowRemoving')" (onRowRemoved)="logEvent('RowRemoved');deleteRow($event.data.ID)">
+    (onRowRemoving)="logEvent('RowRemoving')" (onRowRemoved)="logEvent('RowRemoved');deleteRow($event.data)">
     <dxo-paging [enabled]="true"></dxo-paging>
     <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true">
     </dxo-editing>
     <dxi-column dataField="ID" caption="Project ID">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
     </dxi-column>
-    <dxi-column dataField="projectName" caption="Project Name"></dxi-column>
+    <dxi-column dataField="projectName" caption="Project Name">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
     <dxi-column dataField="startDate" [width]="125" dataType="date" caption="Start Date">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
     </dxi-column>
     <dxi-column dataField="endDate" [width]="125" dataType="date" caption="End Date">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
     </dxi-column>
-    <dxi-column dataField="priority" caption="Priority"></dxi-column>
-    <dxi-column dataField="status" caption="Status"></dxi-column>
+    <dxi-column dataField="Priority" width="200">
+        <dxo-lookup [dataSource]="priority" displayExpr="name" valueExpr="value">
+        </dxo-lookup>
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column dataField="Status" width="200">
+        <dxo-lookup [dataSource]="statuses" displayExpr="name" valueExpr="id">
+        </dxo-lookup>
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
 </dx-data-grid>

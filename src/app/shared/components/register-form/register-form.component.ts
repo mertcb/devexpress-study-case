@@ -17,15 +17,25 @@ import { DxValidationGroupModule } from 'devextreme-angular/ui/validation-group'
 })
 export class RegisterFormComponent {
   // register credentials
-  login = '';
+  email = '';
   password = '';
   name = '';
   surname = '';
   phone = '';
 
-  constructor(public router: Router, public appInfo: AppInfoService) { }
+  constructor(public router: Router, public appInfo: AppInfoService, public authService: AuthService) { }
 
   ngOnInit() {
+  }
+
+  register(args) {
+    if (!args.validationGroup.validate().isValid) {
+      return;
+    }
+
+    this.authService.register(this.email, this.password, this.name, this.surname, this.phone);
+
+    args.validationGroup.reset();
   }
 
   redirect(url: String) {

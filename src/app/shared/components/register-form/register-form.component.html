@@ -30,7 +30,7 @@
         </dx-text-box>
     </div>
     <div class="dx-field">
-        <dx-text-box [(value)]="login" placeholder="Email" width="100%">
+        <dx-text-box [(value)]="email" placeholder="Email" width="100%">
             <dx-validator>
                 <dxi-validation-rule type="email" message="This is not a valid email"></dxi-validation-rule>
                 <dxi-validation-rule type="required" message="Email is required"></dxi-validation-rule>
@@ -48,7 +48,7 @@
     </div>
 
     <div class="dx-field">
-        <dx-button type="default" text="Register" width="100%"></dx-button>
+        <dx-button type="default" text="Register"  (onClick)="register($event)" width="100%"></dx-button>
     </div>
 
     <div class="dx-field">

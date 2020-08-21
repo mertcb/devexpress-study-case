@@ -13,34 +13,50 @@ import ArrayStore from 'devextreme/data/array_store'
 export class DisplayDataComponent {
   dataSource: ArrayStore;
   priority: any[];
-
+  statuses: any[];
   constructor(public dataService: DataService) {
+
     this.dataSource = new ArrayStore({
       key: "ID",
-      data: dataService.getProjects()
+      data: JSON.parse(localStorage.getItem("projects"))
     });
+
     this.priority = [
       { name: 'High', value: 4 },
       { name: 'Urgent', value: 3 },
       { name: 'Normal', value: 2 },
       { name: 'Low', value: 1 }
     ];
+
+    this.statuses = [{
+      "id": 1, "name": "Not Started"
+    }, {
+      "id": 2, "name": "In Progress"
+    }, {
+      "id": 3, "name": "Deferred"
+    }, {
+      "id": 4, "name": "Need Assistance"
+    }, {
+      "id": 5, "name": "Completed"
+    }
+    ];
+
   }
 
-  logEvent(eventName) {
+  logEvent(eventName: string) {
     console.log(eventName);
   }
 
-  addRow(project) {
+  addRow(project: Project) {
     this.dataService.addProject(project);
   }
 
-  updateRow(eventName) {
-    console.log(eventName);
+  updateRow(project: Project) {
+    this.dataService.updateProject(project.ID, project);
   }
 
   deleteRow(project) {
-    this.dataService.deleteProject(project)
+    this.dataService.deleteProject(project.ID)
   }
 }
 
